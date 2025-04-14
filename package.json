@@ -1,0 +1,16 @@
+{
+    "name": "helloworld",
+    "description": "Simple Hello World app with Express and frontend",
+    "version": "1.0.1",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js",
+      "dev": "nodemon server.js"
+    },
+    "author": "Mohamed Mourad",
+    "license": "MIT",
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+   
+  }
