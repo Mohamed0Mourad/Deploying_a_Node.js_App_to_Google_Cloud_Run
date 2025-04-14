@@ -6,13 +6,6 @@ A simple **Node.js + Express** web app with a frontend UI, containerized with **
 
 ---
 
-## 🚀 Live Demo
-
-👉 [Click here to visit the deployed Hello World app](https://<your-service-url>.run.app)  
-_(Replace with your actual Cloud Run URL once deployed)_
-
----
-
 ## 📁 Project Structure
 
 ```plaintext
