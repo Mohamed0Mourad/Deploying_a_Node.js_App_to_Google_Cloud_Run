@@ -1,9 +1,8 @@
 
-```markdown
-# 🌍 Hello World App on Google Cloud Run
 
-A simple **Node.js + Express** web app with a frontend UI, containerized with **Docker**, and deployed to **Google Cloud Run**. The app serves a styled HTML page with a dynamic name and an image of **Adel Shakl**.
+# 🌍 **Hello World App on Google Cloud Run** 🚀
 
+A simple **Node.js + Express** web app with a frontend UI, containerized with **Docker**, and deployed to **Google Cloud Run**.
 ---
 
 ## 📁 Project Structure
@@ -26,113 +25,133 @@ helloworldproject/
 
 ---
 
-## 🛠️ How It Works
+## 🛠️ Setup Instructions
 
-- **Backend**: `Express.js` serves static frontend files.
-- **Frontend**: Displays a dynamic greeting based on URL parameters (`?name=Adel`).
-- **Docker**: The app is containerized with a **multi-stage Dockerfile** for minimal image size.
-- **CI/CD**: Built and deployed via **Google Cloud Build** and **Cloud Run**.
+### 1. Enable the Cloud Run API and Configure Your Shell Environment
 
----
-
-## 📋 Setup Instructions
-
-### ✅ Enable APIs & Configure Shell
-
-Enable the required Cloud Run API and configure the region:
+- **Enable Cloud Run API**:
 
 ```bash
 gcloud services enable run.googleapis.com
+```
+
+- **Set the compute region for your project**:
+
+```bash
 gcloud config set compute/region us-central1
-export LOCATION="us-central1"
+```
+
+- **Create a LOCATION environment variable**:
+
+```bash
+LOCATION="us-central1"
 ```
 
 ---
 
-### 📂 Create Project Structure
+### 2. Write the Sample Application from Your Cloud Shell
 
-Create your project folder and necessary directories:
+Create the project directory and set up the frontend and backend:
 
 ```bash
 mkdir helloworldproject && cd helloworldproject
-mkdir public images
+mkdir public && cd public
 ```
 
-Inside the `public/` directory, add your files:
+Create the `index.html` page:
 
-- `index.html`  
-- `style.css`  
-- `adel-shakl.jpg`  
+```html
+<!DOCTYPE html>
+<html lang="en">
+------
+</html>
+```
 
-Inside the `images/` directory, add the screenshots:
+Create the `style.css` file:
 
-- `img1.png` (Cloud Build)
-- `img2.png` (Cloud Run deploy)
-- `img3.png` (Web app running)
-- `img4.png` (Cloud Run dashboard)
+```css
+body {
+---------
+------
+}
+```
+
+Back to the project directory, create `server.js`:
+
+```javascript
+const express = require('express');
+-------------
+});
+```
+
+Create `package.json`:
+
+```json
+{
+  "name": "helloworld",
+  -------------
+  
+}
+```
 
 ---
 
-### 🐳 Dockerfile (Multi-Stage)
+### 3. Containerize Your App and Upload It to Artifact Registry
 
-Create a `Dockerfile` with multi-stage build for a minimal container:
+Create a `Dockerfile` with the following content:
 
 ```Dockerfile
-# Stage 1: Install dependencies
-FROM node:18-slim AS builder
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
-
-# Stage 2: Production-ready build
 FROM node:18-slim
 WORKDIR /usr/src/app
-COPY --from=builder /usr/src/app ./
-RUN npm prune --production
+
+COPY package*.json ./
+
+RUN npm install --only=production
+
+COPY . .
+
 EXPOSE 8080
+
 CMD ["npm", "start"]
 ```
 
----
-
-### 🔧 Run Locally (optional)
-
-To run your app locally, use Docker:
-
-```bash
-docker build -t helloworldproject .
-docker run -d -p 8080:8080 helloworldproject
-```
-
-Then, open Web Preview → Port 8080 in Cloud Shell or use `curl` to test locally:
-
-```bash
-curl localhost:8080
-```
-
----
-
-### ☁️ Deploy to Cloud Run
-
-Push the container image and deploy it to Cloud Run:
-
-1. **Build & Push the Container Image:**
+Now, build your container image using **Cloud Build**:
 
 ```bash
 gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT/helloworldproject
 ```
 
-2. **Deploy to Cloud Run:**
+**Cloud Build** will execute the build steps in a Docker container and push your app to **Artifact Registry**.
+
+---
+
+### 4. Deploy to Cloud Run
+
+Deploy your containerized app to **Cloud Run**:
 
 ```bash
-gcloud run deploy helloworld \
-  --image gcr.io/$GOOGLE_CLOUD_PROJECT/helloworldproject \
-  --allow-unauthenticated \
-  --region=$LOCATION
+gcloud run deploy --image gcr.io/$GOOGLE_CLOUD_PROJECT/helloworldproject --allow-unauthenticated --region=$LOCATION
 ```
 
-After deployment, you will get a URL for your live app.
+When prompted, confirm the service name by pressing **Enter**. After the deployment, you'll receive a URL for your app.
+
+---
+
+### 5. Clean Up
+
+To avoid unnecessary charges, you can delete the container image and Cloud Run service:
+
+- **Delete the container image**:
+
+```bash
+gcloud container images delete gcr.io/$GOOGLE_CLOUD_PROJECT/helloworldproject
+```
+
+- **Delete the Cloud Run service**:
+
+```bash
+gcloud run services delete helloworld --region=us-west1
+```
 
 ---
 
@@ -141,20 +160,9 @@ After deployment, you will get a URL for your live app.
 | Step                          | Screenshot                |
 |------------------------------|---------------------------|
 | **Build with Cloud Build**    | ![Build](images/img1.png) |
-| **Cloud Run Deployment**      | ![Deploy](images/img2.png)|
-| **Web App Output**            | ![Web App](images/img3.png)|
+| **Cloud Run Deploy**          | ![Deploy](images/img2.png)|
+| **Web App Running**           | ![Web App](images/img3.png)|
 | **Cloud Run Dashboard**       | ![Dashboard](images/img4.png)|
-
----
-
-## 🧹 Cleanup (Optional)
-
-To avoid charges, you can delete the container image and Cloud Run service:
-
-```bash
-gcloud container images delete gcr.io/$GOOGLE_CLOUD_PROJECT/helloworldproject
-gcloud run services delete helloworld --region=us-central1
-```
 
 ---
 
