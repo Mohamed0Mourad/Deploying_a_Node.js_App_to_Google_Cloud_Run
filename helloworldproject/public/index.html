@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hello App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Hello <span id="name">World</span>!</h1>
+      <img src="adel-shakl.jpg" alt="Adel Shakl" class="adel-img" />
+  </div>
+  <script>
+    // You can enhance this later with dynamic fetching if needed
+    document.getElementById('name').textContent = 
+      new URLSearchParams(window.location.search).get('name') || 'World';
+  </script>
+</body>
+</html>
