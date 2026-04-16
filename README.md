@@ -1,31 +1,31 @@
 
 
-# 🌍 **Hello World App on Google Cloud Run** 🚀
+# **Hello World App on Google Cloud Run** 
 
 A simple **Node.js + Express** web app with a frontend UI, containerized with **Docker**, and deployed to **Google Cloud Run**.
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```plaintext
 helloworldproject/
-├── Dockerfile                 # Dockerfile for containerization 🐳
-├── package.json               # Project dependencies and scripts 📦
-├── server.js                  # Express server setup 🌐
-├── public/                    # Frontend files 🎨
-│   ├── index.html             # HTML structure 📝
-│   ├── style.css              # Styles for the frontend 💅
-│   └── adel-shakl.jpg         # Image of Adel Shakl 📸
-├── images/                    # Screenshots for documentation 📸
-│   ├── img1.png               # Build screenshot 🛠️
-│   ├── img2.png               # Cloud Run deploy screenshot ☁️
-│   ├── img3.png               # Web app running screenshot 🌍
-│   └── img4.png               # Cloud Run dashboard screenshot 📊
+├── Dockerfile                 # Dockerfile for containerization 
+├── package.json               # Project dependencies and scripts 
+├── server.js                  # Express server setup 
+├── public/                    # Frontend files 
+│   ├── index.html             # HTML structure 
+│   ├── style.css              # Styles for the frontend 
+│   └── adel-shakl.jpg         # Image of Adel Shakl 
+├── images/                    # Screenshots for documentation 
+│   ├── img1.png               # Build screenshot 
+│   ├── img2.png               # Cloud Run deploy screenshot 
+│   ├── img3.png               # Web app running screenshot
+│   └── img4.png               # Cloud Run dashboard screenshot 
 ```
 
 ---
 
-## 🛠️ Setup Instructions
+##  Setup Instructions
 
 ### 1. Enable the Cloud Run API and Configure Your Shell Environment
 
@@ -155,7 +155,7 @@ gcloud run services delete helloworld --region=us-west1
 
 ---
 
-## 🖼️ Screenshots
+##  Screenshots
 
 | Step                          | Screenshot                |
 |------------------------------|---------------------------|
